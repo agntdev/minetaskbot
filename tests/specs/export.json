@@ -1,19 +1,15 @@
 [
   {
-    "name": "/export",
+    "name": "/export shows empty state when no tasks",
     "steps": [
       {
+        "send": { "text": "/export" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Download a CSV file of all tasks"
-            }
+            "payload": { "text": "No tasks to export." }
           }
-        ],
-        "send": {
-          "text": "/export"
-        }
+        ]
       }
     ]
   }
