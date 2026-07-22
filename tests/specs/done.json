@@ -1,19 +1,15 @@
 [
   {
-    "name": "/done",
+    "name": "/done shows empty state when no tasks",
     "steps": [
       {
+        "send": { "text": "/done" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Mark a task as completed by ID"
-            }
+            "payload": { "text": "No pending tasks to mark done." }
           }
-        ],
-        "send": {
-          "text": "/done"
-        }
+        ]
       }
     ]
   }

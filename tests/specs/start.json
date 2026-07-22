@@ -1,13 +1,13 @@
 [
   {
-    "name": "/start replies with the welcome + main menu",
+    "name": "/start replies with the welcome + main menu + no tasks",
     "steps": [
       {
         "send": { "text": "/start" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+            "payload": { "text": "👋 Welcome! Tap a button below to get started.\n\nNo tasks yet — tap Add Task to create one." }
           }
         ]
       }

@@ -1,19 +1,89 @@
 [
   {
-    "name": "/add",
+    "name": "/add — full add task flow with skip",
     "steps": [
       {
+        "send": { "text": "/add" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Prompt to add a new task with title, optional description, and estimated duration"
-            }
+            "payload": { "text": "What's the task title?" }
           }
-        ],
-        "send": {
-          "text": "/add"
-        }
+        ]
+      },
+      {
+        "send": { "text": "My Task" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Add a description? (or skip)" }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "task:skip:desc" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Estimated duration? (e.g. 2h, 30m — or skip)" }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "task:skip:duration" },
+        "expect": [
+          {
+            "method": "answerCallbackQuery"
+          },
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Task created: T1 — My Task" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/add — with description and duration",
+    "steps": [
+      {
+        "send": { "text": "/add" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "What's the task title?" }
+          }
+        ]
+      },
+      {
+        "send": { "text": "Mining Rig Setup" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Add a description? (or skip)" }
+          }
+        ]
+      },
+      {
+        "send": { "text": "Set up the new mining rig" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Estimated duration? (e.g. 2h, 30m — or skip)" }
+          }
+        ]
+      },
+      {
+        "send": { "text": "3h" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Task created: T1 — Mining Rig Setup" }
+          }
+        ]
       }
     ]
   }

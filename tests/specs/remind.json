@@ -1,19 +1,15 @@
 [
   {
-    "name": "/remind",
+    "name": "/remind shows empty state when no tasks",
     "steps": [
       {
+        "send": { "text": "/remind" },
         "expect": [
           {
             "method": "sendMessage",
-            "payload": {
-              "text": "Set a reminder for a task with time and repeat options"
-            }
+            "payload": { "text": "No active tasks to set reminders for." }
           }
-        ],
-        "send": {
-          "text": "/remind"
-        }
+        ]
       }
     ]
   }
