@@ -1,6 +1,7 @@
 import { Composer } from "grammy";
 import { createBot, type BotContext } from "./toolkit/index.js";
 import type { StorageAdapter } from "grammy";
+import { clearStores } from "./store.js";
 
 // The per-chat session shape (ephemeral conversation state only). Extend as the
 // bot grows. Durable domain data must NOT live here — use the toolkit's
@@ -45,6 +46,9 @@ export interface BuildBotOptions {
  * build-time manifest because Workers has no filesystem.
  */
 export async function buildBot(token: string, opts: BuildBotOptions = {}) {
+  // Clear in-memory stores so each fresh bot (test harness) starts clean.
+  clearStores();
+
   const bot = createBot<Session>(token, {
     initial: () => ({}),
     storage: opts.storage,
